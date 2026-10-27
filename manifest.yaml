@@ -3,6 +3,10 @@ dist:
   description: Basic OTel Collector distribution with Clickhouse Exporter
   output_path: ./otelcol-clickhouse
 
+extensions:
+  - gomod:
+      github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckv2extension v0.159.0
+
 exporters:
   - gomod:
       go.opentelemetry.io/collector/exporter/debugexporter v0.159.0
