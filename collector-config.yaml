@@ -1,0 +1,34 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  # UDP receiver for standard Syslog
+  syslog/udp:
+    udp:
+      listen_address: "0.0.0.0:514"
+      async:
+        readers: 4
+        processors: 4
+        max_queue_length: 1000
+
+    protocol: rfc5424
+    location: UTC
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug]
+    metrics:
+      receivers: [otlp]
+      exporters: [debug]
+    logs:
+      receivers: [syslog/udp, otlp]
+      exporters: [debug]
