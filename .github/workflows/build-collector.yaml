@@ -10,6 +10,11 @@ on:
 jobs:
   build:
     runs-on: arc-runner-set
+
+    # 1. Force all steps to target modern ARC's DinD socket location
+    env:
+      DOCKER_HOST: unix:///run/docker/docker.sock
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
