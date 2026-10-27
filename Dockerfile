@@ -6,7 +6,7 @@ WORKDIR /build
 
 COPY ./manifest.yaml manifest.yaml
 
-RUN --mount=type=cache,target=/root/.cache/go-build GO111MODULE=on go install go.opentelemetry.io/collector/cmd/builder@v0.159.0
+RUN --mount=type=cache,target=/root/.cache/go-build GO111MODULE=on go install go.opentelemetry.io/collector/cmd/builder@v0.164.0
 RUN --mount=type=cache,target=/root/.cache/go-build builder --config manifest.yaml
 
 FROM gcr.io/distroless/base:latest
