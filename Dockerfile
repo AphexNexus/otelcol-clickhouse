@@ -1,7 +1,7 @@
 FROM alpine:3.19 AS certs
 RUN apk --update add ca-certificates
 
-FROM golang:1.25.0 AS build-stage
+FROM golang:1.27.0 AS build-stage
 WORKDIR /build
 
 COPY ./manifest.yaml manifest.yaml

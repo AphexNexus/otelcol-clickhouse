@@ -39,6 +39,3 @@ jobs:
           context: .
           push: true
           tags: justindesilets/otelcol-clickhouse:${{ github.sha }}
-          build-args: |
-            GO_VERSION=1.27
-            GOTOOLCHAIN=auto
