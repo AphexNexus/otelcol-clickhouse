@@ -21,4 +21,4 @@ COPY --chmod=755 --from=build-stage /build/otelcol-clickhouse /otelcol
 ENTRYPOINT ["/otelcol/otelcol-clickhouse"]
 CMD ["--config", "/otelcol/config.yaml"]
 
-EXPOSE 4317 4318 12001 514 8888
+EXPOSE 4317 4318 12001 514 8888 13111

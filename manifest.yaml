@@ -7,8 +7,6 @@ dist:
 extensions:
   - gomod:
       github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.164.0
-  - gomod:
-      go.opentelemetry.io/collector/extension/memorylimiterextension v0.164.0
 
 exporters:
   - gomod:
@@ -23,6 +21,8 @@ processors:
       go.opentelemetry.io/collector/processor/batchprocessor v0.164.0
   - gomod:
       github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor v0.159.0
+  - gomod:
+      go.opentelemetry.io/collector/processor/memorylimiterprocessor v0.164.0
 
 receivers:
   - gomod:

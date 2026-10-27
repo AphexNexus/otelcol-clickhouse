@@ -17,6 +17,12 @@ receivers:
     protocol: rfc5424
     location: UTC
 
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 4000
+    spike_limit_mib: 800
+
 exporters:
   debug:
     verbosity: detailed
@@ -31,7 +37,7 @@ service:
       exporters: [debug]
     logs:
       receivers: [file_log, syslog, otlp]
-      processors: [k8s_attributes, batch]
+      processors: [k8s_attributes, batch, memory_limiter]
       exporters: [debug]
   telemetry:
     metrics:
