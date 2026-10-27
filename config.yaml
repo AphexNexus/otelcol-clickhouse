@@ -6,7 +6,7 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
   # UDP receiver for standard Syslog
-  syslog/udp:
+  syslog:
     udp:
       listen_address: "0.0.0.0:514"
       async:
@@ -30,7 +30,8 @@ service:
       receivers: [otlp]
       exporters: [debug]
     logs:
-      receivers: [syslog/udp, otlp]
+      receivers: [file_log, syslog, otlp]
+      processors: [k8s_attributes, batch]
       exporters: [debug]
   telemetry:
     metrics:

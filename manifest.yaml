@@ -14,10 +14,14 @@ exporters:
 processors:
   - gomod:
       go.opentelemetry.io/collector/processor/batchprocessor v0.159.0
+  - gomod:
+      github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor v0.159.0
 
 receivers:
   - gomod:
       go.opentelemetry.io/collector/receiver/otlpreceiver v0.159.0
+  - gomod:
+      github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.159.0
   - gomod:
       github.com/open-telemetry/opentelemetry-collector-contrib/receiver/syslogreceiver v0.159.0
 
