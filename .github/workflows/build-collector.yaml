@@ -13,7 +13,7 @@ jobs:
 
     # 1. Force all steps to target modern ARC's DinD socket location
     env:
-      DOCKER_HOST: unix:///run/docker/docker.sock
+      DOCKER_HOST: "tcp://localhost:2375"
 
     steps:
       - name: Checkout code
