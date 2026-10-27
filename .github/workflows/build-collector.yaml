@@ -11,10 +11,6 @@ jobs:
   build:
     runs-on: arc-runner-set
 
-    # 1. Force all steps to target modern ARC's DinD socket location
-    env:
-      DOCKER_HOST: "tcp://localhost:2375"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
