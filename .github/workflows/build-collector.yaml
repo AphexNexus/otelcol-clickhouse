@@ -20,6 +20,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Wait for Docker Daemon to be ready
+        run: |
+          echo "Waiting for Docker daemon..."
+          for i in {1..30}; do
+            if docker info >/dev/null 2>&1; then
+              echo "Docker is ready!"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Docker daemon failed to start in time."
+          exit 1
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
 
