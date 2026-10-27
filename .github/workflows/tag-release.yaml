@@ -1,0 +1,40 @@
+# .github/workflows/tag-release.yaml
+name: Tag Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: arc-runner-set
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27'
+
+      - name: Install OCB
+        run: go install go.opentelemetry.io/collector/cmd/builder@v0.164.0
+
+      - name: Build collector
+        run: builder --config manifest.yaml
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        with:
+          platforms: linux/amd64
+          context: .
+          push: true
+          tags: justindesilets/otelcol-clickhouse:${{ github.ref_name }}
