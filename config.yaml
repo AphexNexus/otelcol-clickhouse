@@ -6,7 +6,7 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
   # UDP receiver for standard Syslog
-  syslog/udp:
+  syslog:
     udp:
       listen_address: "0.0.0.0:514"
       async:
@@ -16,6 +16,12 @@ receivers:
 
     protocol: rfc5424
     location: UTC
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 4000
+    spike_limit_mib: 800
 
 exporters:
   debug:
@@ -30,7 +36,8 @@ service:
       receivers: [otlp]
       exporters: [debug]
     logs:
-      receivers: [syslog/udp, otlp]
+      receivers: [file_log, syslog, otlp]
+      processors: [k8s_attributes, batch, memory_limiter]
       exporters: [debug]
   telemetry:
     metrics:
