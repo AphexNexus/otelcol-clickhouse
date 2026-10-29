@@ -35,6 +35,8 @@ receivers:
       github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.164.0
   - gomod:
       github.com/open-telemetry/opentelemetry-collector-contrib/receiver/syslogreceiver v0.164.0
+  - gomod:
+      github.com/open-telemetry/opentelemetry-collector-contrib/receiver/udplogreceiver v0.164.0
 
 providers:
   - gomod:
